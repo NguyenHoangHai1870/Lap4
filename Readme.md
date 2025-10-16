@@ -45,7 +45,7 @@ Trực quan hóa embedding bằng PCA.
 
 Kết quả sẽ được in ra console và biểu đồ scatter plot hiển thị các cụm từ.
 
-3. Phân tích kết quả
+## 3. Hướng dẫn chạy code
 3.1. Độ tương đồng và từ đồng nghĩa
 Vector for 'king' (10 phần tử đầu):
 
