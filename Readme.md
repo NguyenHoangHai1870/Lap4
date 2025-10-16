@@ -1,6 +1,6 @@
 # Báo cáo Lab: Word Embedding với Gensim và Spark
 
-1. Giải thích các bước thực hiện
+1.Giải thích các bước thực hiện
 
 Sử dụng model pre-trained (Gensim)
    - Tải model `glove-wiki-gigaword-50` bằng Gensim.  
@@ -25,10 +25,12 @@ Trực quan hóa embedding
    - Giảm chiều vector từ 100D xuống 2D bằng PCA.  
    - Vẽ scatter plot với annotation các từ.
 
+2.Hướng dẫn chạy code
 
-2. Hướng dẫn chạy code
 Cài đặt các thư viện:
+
 pip install gensim numpy matplotlib pyspark scikit-learn
+
 Chạy từng cell trong notebook Colab:
 
 Tải model pre-trained, thử nghiệm vector, similarity, most similar.
@@ -41,7 +43,10 @@ Trực quan hóa embedding bằng PCA.
 
 Kết quả sẽ được in ra console và biểu đồ scatter plot hiển thị các cụm từ.
 
+
 3. Phân tích kết quả
+
+
 3.1. Độ tương đồng và từ đồng nghĩa
 
 Vector for 'king' (10 phần tử đầu):
@@ -70,11 +75,13 @@ computers   	0.6353
 usb	         0.6087
 
 Nhận xét:
+
    Pre-trained GloVe cho độ tương đồng cao, phản ánh mối quan hệ ngữ nghĩa rõ ràng.
 
    Spark Word2Vec nhận dạng từ đồng nghĩa trong dữ liệu lớn, nhưng similarity thấp hơn, do corpus domain-specific khác với pre-trained corpus.
 
 3.2. Trực quan hóa embedding
+
    PCA giảm chiều từ 100D → 2D.
 
 Các cụm từ cùng chủ đề nằm gần nhau:
@@ -85,6 +92,7 @@ Các cụm từ cùng chủ đề nằm gần nhau:
    Biểu đồ scatter plot thể hiện mối quan hệ ngữ nghĩa giữa các từ, xác nhận model học được embedding hiệu quả.
 
 3.3. So sánh model pre-trained và self-trained
+
 Tiêu chí	                  (GloVe)	                 (Spark/Gensim)
 Độ phủ từ vựng	            Rất lớn	               Giới hạn theo corpus
 Từ đồng nghĩa chính xác   	Cao	                  Tốt với từ phổ biến
@@ -92,6 +100,7 @@ Từ đồng nghĩa chính xác   	Cao	                  Tốt với từ phổ 
 Kích thước dữ liệu	      Lớn (6B token)	         Phụ thuộc dữ liệu
 
 4. Khó khăn và giải pháp
+5. 
 Khó khăn:
 
    Dữ liệu lớn dễ bị OOM khi trực quan hóa.
