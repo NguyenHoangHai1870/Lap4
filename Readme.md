@@ -45,85 +45,81 @@ Trực quan hóa embedding bằng PCA.
 
 Kết quả sẽ được in ra console và biểu đồ scatter plot hiển thị các cụm từ.
 
-## 3. Phân tích kết quả
+3. Phân tích kết quả
+3.1. Độ tương đồng và từ đồng nghĩa
+Vector for 'king' (10 phần tử đầu):
 
-### 3.1. Độ tương đồng và từ đồng nghĩa
-
-- **Vector for 'king'** (10 phần tử đầu):
-
+text
+Copy code
 [ 0.50451 0.68607 -0.59517 -0.022801 0.60046 -0.13498 -0.08813 0.47377 -0.61798 -0.31012 ]
+Similarity:
 
-markdown
+king vs queen: 0.7839
+
+king vs man: 0.5309
+
+Most similar to 'computer' (GloVe pre-trained):
+
+text
 Copy code
-
-- **Similarity:**
-  - king vs queen: 0.7839
-  - king vs man: 0.5309
-
-- **Most similar to 'computer' (GloVe pre-trained):**
-
 [('computers', 0.9165), ('software', 0.8815), ('technology', 0.8526),
-('electronic', 0.8126), ('internet', 0.8060), ('computing', 0.8026),
-('devices', 0.8016), ('digital', 0.7992), ('applications', 0.7913), ('pc', 0.7883)]
+ ('electronic', 0.8126), ('internet', 0.8060), ('computing', 0.8026),
+ ('devices', 0.8016), ('digital', 0.7992), ('applications', 0.7913), ('pc', 0.7883)]
+Most similar to 'computer' (Spark Word2Vec, dữ liệu lớn):
 
-yaml
-Copy code
+Word	Similarity
+desktop	0.7051
+laptop	0.6597
+uwowned	0.6361
+computers	0.6353
+usb	0.6087
 
-- **Most similar to 'computer' (Spark Word2Vec, dữ liệu lớn):**
+Nhận xét:
 
-| Word      | Similarity |
-|-----------|------------|
-| desktop   | 0.7051     |
-| laptop    | 0.6597     |
-| uwowned   | 0.6361     |
-| computers | 0.6353     |
-| usb       | 0.6087     |
+Pre-trained GloVe cho độ tương đồng cao, phản ánh mối quan hệ ngữ nghĩa rõ ràng.
 
-**Nhận xét:**  
-- Pre-trained GloVe cho độ tương đồng cao, phản ánh mối quan hệ ngữ nghĩa rõ ràng.  
-- Spark Word2Vec nhận dạng từ đồng nghĩa trong dữ liệu lớn, nhưng similarity thấp hơn, do corpus domain-specific khác với pre-trained corpus.
+Spark Word2Vec nhận dạng từ đồng nghĩa trong dữ liệu lớn, nhưng similarity thấp hơn, do corpus domain-specific khác với pre-trained corpus.
 
----
+3.2. Trực quan hóa embedding
+PCA giảm chiều từ 100D → 2D.
 
-### 3.2. Trực quan hóa embedding
+Các cụm từ cùng chủ đề nằm gần nhau:
 
-- PCA giảm chiều từ 100D → 2D.  
-- Các cụm từ cùng chủ đề nằm gần nhau:
-  - `'king' – 'queen'`
-  - `'computer' – 'laptop' – 'desktop'`  
+'king' – 'queen'
 
-- Biểu đồ scatter plot thể hiện mối quan hệ ngữ nghĩa giữa các từ, xác nhận model học được embedding hiệu quả.
+'computer' – 'laptop' – 'desktop'
 
----
+Biểu đồ scatter plot thể hiện mối quan hệ ngữ nghĩa giữa các từ, xác nhận model học được embedding hiệu quả.
 
-### 3.3. So sánh model pre-trained và self-trained
+3.3. So sánh model pre-trained và self-trained
+Tiêu chí	Pre-trained (GloVe)	Self-trained (Spark/Gensim)
+Độ phủ từ vựng	Rất lớn	Giới hạn theo corpus
+Từ đồng nghĩa chính xác	Cao	Tốt với từ phổ biến
+Ứng dụng domain-specific	Hạn chế	Tốt nếu dữ liệu đúng domain
+Kích thước dữ liệu	Lớn (6B token)	Phụ thuộc dữ liệu
 
-| Tiêu chí               | Pre-trained (GloVe) | Self-trained (Spark/Gensim) |
-|------------------------|--------------------|----------------------------|
-| Độ phủ từ vựng          | Rất lớn            | Giới hạn theo corpus       |
-| Từ đồng nghĩa chính xác | Cao                | Tốt với từ phổ biến        |
-| Ứng dụng domain-specific| Hạn chế            | Tốt nếu dữ liệu đúng domain|
-| Kích thước dữ liệu      | Lớn (6B token)    | Phụ thuộc dữ liệu          |
+4. Khó khăn và giải pháp
+Khó khăn:
 
----
+Dữ liệu lớn dễ bị OOM khi trực quan hóa.
 
-## 4. Khó khăn và giải pháp
+Một số từ OOV trong pre-trained model.
 
-- **Khó khăn:**
-  - Dữ liệu lớn dễ bị OOM khi trực quan hóa.
-  - Một số từ OOV trong pre-trained model.
-  - Xử lý JSON nén tốn thời gian.
+Xử lý JSON nén tốn thời gian.
 
-- **Giải pháp:**
-  - Sample 1% vocab trước khi vẽ scatter plot.
-  - Thêm vector zeros cho từ OOV.
-  - Sử dụng Spark để xử lý song song dữ liệu lớn.
+Giải pháp:
 
----
+Sample 1% vocab trước khi vẽ scatter plot.
 
-## 5. Trích dẫn tài liệu
+Thêm vector zeros cho từ OOV.
 
-1. Pennington, J., Socher, R., & Manning, C. (2014). *GloVe: Global Vectors for Word Representation.* EMNLP.  
-2. Gensim Documentation: [https://radimrehurek.com/gensim/](https://radimrehurek.com/gensim/)  
-3. Apache Spark MLlib: [https://spark.apache.org/docs/latest/ml-features.html#word2vec](https://spark.apache.org/docs/latest/ml-features.html#word2vec)  
-4. Scikit-learn PCA: [https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html](
+Sử dụng Spark để xử lý song song dữ liệu lớn.
+
+5. Trích dẫn tài liệu
+Pennington, J., Socher, R., & Manning, C. (2014). GloVe: Global Vectors for Word Representation. EMNLP.
+
+Gensim Documentation: https://radimrehurek.com/gensim/
+
+Apache Spark MLlib: https://spark.apache.org/docs/latest/ml-features.html#word2vec
+
+Scikit-learn PCA: https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
