@@ -25,13 +25,10 @@
    - Giảm chiều vector từ 100D xuống 2D bằng PCA.  
    - Vẽ scatter plot với annotation các từ.
 
----
 
 2. Hướng dẫn chạy code
-
 1. Cài đặt các thư viện:
-
-```bash
+2. 
 pip install gensim numpy matplotlib pyspark scikit-learn
 Chạy từng cell trong notebook Colab:
 
