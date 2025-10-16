@@ -100,7 +100,7 @@ Từ đồng nghĩa chính xác   	Cao	                  Tốt với từ phổ 
 Kích thước dữ liệu	      Lớn (6B token)	         Phụ thuộc dữ liệu
 
 4. Khó khăn và giải pháp
-5. 
+
 Khó khăn:
 
    Dữ liệu lớn dễ bị OOM khi trực quan hóa.
