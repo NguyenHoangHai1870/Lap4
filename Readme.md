@@ -2,33 +2,32 @@
 
 1. Giải thích các bước thực hiện
 
-1. Sử dụng model pre-trained (Gensim)
+Sử dụng model pre-trained (Gensim)
    - Tải model `glove-wiki-gigaword-50` bằng Gensim.  
    - Lấy vector của từ đơn (`get_vector`), tính độ tương đồng (`get_similarity`) và tìm từ đồng nghĩa (`get_most_similar`).
 
-2. Nhúng câu/văn bản 
+Nhúng câu/văn bản 
    - Triển khai hàm `embed_document()` bằng cách lấy trung bình vector các từ trong câu.  
    - Ví dụ: `"The queen rules the country."` → vector 50 chiều.
 
-3. Huấn luyện Word2Vec trên dữ liệu nhỏ (Gensim) 
+Huấn luyện Word2Vec trên dữ liệu nhỏ (Gensim) 
    - Sử dụng tập `en_ewt-ud-train.txt`.  
    - Huấn luyện model với `vector_size=100`, `window=5`, `min_count=2`.  
    - Lưu và tải lại model.
 
-4. Huấn luyện Word2Vec trên dữ liệu lớn (Spark MLlib)
+Huấn luyện Word2Vec trên dữ liệu lớn (Spark MLlib)
    - Đọc dữ liệu `c4-train.00000-of-01024-30K.json.gz`.  
    - Tiền xử lý: chữ thường, loại bỏ ký tự không phải chữ cái, token hóa.  
    - Huấn luyện Word2Vec (`vectorSize=100`, `minCount=5`) và lưu model.
 
-5. Trực quan hóa embedding  
+Trực quan hóa embedding  
    - Lấy sample 1% vocab để tránh OOM.  
    - Giảm chiều vector từ 100D xuống 2D bằng PCA.  
    - Vẽ scatter plot với annotation các từ.
 
 
 2. Hướng dẫn chạy code
-1. Cài đặt các thư viện:
-2. 
+Cài đặt các thư viện:
 pip install gensim numpy matplotlib pyspark scikit-learn
 Chạy từng cell trong notebook Colab:
 
