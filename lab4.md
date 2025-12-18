@@ -14,8 +14,8 @@ Cấu trúc thư mục dự án (Directory Structure)
 ├── lap4.md                         # File báo cáo chi tiết này
 │                          
 │
-├── src/                                 # Mã nguồn Python (Modules/Classes tái sử dụng)
-│   └── Lap4
+├──  Lap4                             # Mã nguồn Python (Modules/Classes tái sử dụng)
+│   
 ├── .gitignore                           # File cấu hình bỏ qua file rác (tmp, __pycache__)
 
 
@@ -156,3 +156,4 @@ PySpark Documentation: pyspark.ml.Pipeline, pyspark.ml.feature.HashingTF, IDF.
 
 
 Pandas Documentation: pd.read_csv, dropna.
+
