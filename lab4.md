@@ -11,13 +11,13 @@ Cấu trúc thư mục dự án (Directory Structure)
 ├── notebook/                            # Thư mục chứa Jupyter Notebooks (Mã nguồn chính)
 │   ├── Lab4.pdf                         # Thực hành 
 │   
-├── report/                              # Thư mục chứa báo cáo
-│   └── lap4.md                          # File báo cáo chi tiết này
+├── lap4.md                         # File báo cáo chi tiết này
+│                          
 │
 ├── src/                                 # Mã nguồn Python (Modules/Classes tái sử dụng)
 │   └── Lap4
 ├── .gitignore                           # File cấu hình bỏ qua file rác (tmp, __pycache__)
-└── README.md                            # Hướng dẫn chạy và tổng quan dự án
+
 
 
 
@@ -153,5 +153,6 @@ Giải pháp: Ép kiểu về số nguyên astype(int) để đảm bảo tươn
 Scikit-learn Documentation: sklearn.linear_model.LogisticRegression, sklearn.feature_extraction.text.TfidfVectorizer, sklearn.naive_bayes.MultinomialNB.
 
 PySpark Documentation: pyspark.ml.Pipeline, pyspark.ml.feature.HashingTF, IDF.
+
 
 Pandas Documentation: pd.read_csv, dropna.
